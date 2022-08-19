@@ -6,8 +6,16 @@ class Device(models.Model):
   issues = models.CharField(max_length=100, default='No issues')
   description = models.TextField(max_length=100, blank=True)
 
+  condition = models.CharField(
+    max_length=20,
+    default = 'New',
+    choices = (
+      ('New', 'New'),
+      ('Used', 'Used'),
+    ))
+
   status = models.CharField(
-    max_length = 20,
+    max_length=20,
     default = 'Sold',
     choices = (
       ('Sold', 'Sold'),
@@ -22,7 +30,7 @@ class Device(models.Model):
 
   def __str__(self):
     '''Returns string representation of the Device model'''
-    return f'Type: {0} Price: {1}'.format(self.type, self.price)
+    return f'{self.type} - ${self.price}'
 
 class Laptop(Device):
   '''Inherits from the Device model'''
