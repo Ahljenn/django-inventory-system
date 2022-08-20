@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from itertools import chain
 from .models import *
 
 # Create your views here.
@@ -21,6 +22,13 @@ def display_laptops(request):
 
 def display_mobiles(request):
   items = Mobile.objects.all()
+  context = {
+    'items' : items,
+  }
+  return render(request, 'index.html', context)
+
+def display_all(request):
+  items = list(chain(Desktop.objects.all(), Laptop.objects.all(), Mobile.objects.all()))
   context = {
     'items' : items,
   }
