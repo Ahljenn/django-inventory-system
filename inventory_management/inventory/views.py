@@ -12,7 +12,6 @@ def index(request):
 def about(request):
   return render(request, 'about.html')
 
-
 # Display Devices
 # ================================================ #
 def display_device(request, cls):
@@ -76,19 +75,18 @@ def add_mobile(request):
 
 
 
-
 # Edit Devices
 # ================================================ #
-def edit_device(request, pk, model, cls):
+def edit_device(request, pk, model, modelForm):
   item = get_object_or_404(model, pk = pk)
   if request.method == 'POST':
-    form = cls(request.POST, instance = item)
+    form = modelForm(request.POST, instance = item)
     if form.is_valid():
       form.save()
       return redirect('index')
   
   else:
-    form = cls(instance = item)
+    form = modelForm(instance = item)
     return render(request, 'edit_device.html', {'form': form})
 
 def edit_desktop(request, pk):
@@ -99,4 +97,30 @@ def edit_laptop(request, pk):
 
 def edit_mobile(request, pk):
   return edit_device(request, pk, Mobile, MobileForm)
+# ================================================ #
+
+
+
+# Delete Devices
+# ================================================ #
+def delete_device(request, pk, cls, header):
+
+  cls.objects.filter(id = pk).delete()
+  items = cls.objects.all()
+
+  context = {
+    'items': items,
+    'header': header
+  }
+
+  return render(request, 'index.html', context)
+
+def delete_desktop(request, pk):
+  return delete_device(request, pk, Desktop, "Desktop")
+
+def delete_laptop(request, pk):
+  return delete_device(request, pk, Laptop, "Laptop")
+
+def delete_mobile(request, pk):
+  return delete_device(request, pk, Mobile, "Mobile")
 # ================================================ #

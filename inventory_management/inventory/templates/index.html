@@ -50,14 +50,17 @@
           {% if header|lower == "desktop" %}
             <td>
               <a href="{% url 'edit_desktop' item.pk %}" class="btn btn-warning" role="button"> Edit</a>
+              <a href="{% url 'delete_desktop' item.pk %}" class="btn btn-danger" role="button"> X</a>
             </td>
           {% elif header|lower == "laptop" %}
             <td>
               <a href="{% url 'edit_laptop' item.pk %}" class="btn btn-warning" role="button"> Edit</a>
+              <a href="{% url 'delete_laptop' item.pk %}" class="btn btn-danger" role="button"> X</a>
             </td>
           {% elif header|lower == "mobile"  %}
             <td>
               <a href="{% url 'edit_mobile' item.pk %}"class="btn btn-warning" role="button"> Edit</a>
+              <a href="{% url 'delete_mobile' item.pk %}" class="btn btn-danger" role="button"> X</a>
             </td>
           {% endif %}
 
