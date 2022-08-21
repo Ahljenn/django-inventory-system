@@ -15,29 +15,45 @@
   <a href="{% url 'add_mobile' %}"  class="btn btn-warning btn-sm" role="button"> +</a>
 </div>
 
-<table class="table table-hover">
-  <caption class="caption-top fs-3">{{ header }}</caption>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Model</th>
-      <th>Price</th>
-      <th>Status</th>
-      <th>Condition</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    {% for item in items %}
+{% if items %}
+  <table class="table table-hover">
+    <caption class="caption-top fs-3">{{ header }}</caption>
+    <thead>
       <tr>
-        <td>{{ item.pk }}</td>
-        <td>{{ item.type }}</td>
-        <td>{{ item.price }}</td>
-        <td>{{ item.status }}</td>
-        <td>{{ item.condition }}</td>
+        {% if header != 'All Items'%}
+          <th>ID</th>
+        {% endif %}
+        <th>Model</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Condition</th>
       </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      {% for item in items %}
+        <tr>
+          {% if header != 'All Items'%}
+            <td>{{ item.pk }}</td>
+          {% endif %}
+          <td>{{ item.type }}</td>
+          <td>{{ item.price }}</td>
+          {% if item.status == 'Sold' %}
+            <td class="text-danger">{{ item.status }}</td>
+          {% else %}
+            <td>{{ item.status }}</td>
+          {% endif %}
+          <td>{{ item.condition }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% else %}
+
+  <br>
+  <h1>Welcome, click on any of the above to start.</h1>
+
+{% endif %}
 
 {% endblock %}

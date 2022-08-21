@@ -9,6 +9,9 @@ from .forms import *
 def index(request):
   return render(request, 'index.html')
 
+def about(request):
+  return render(request, 'about.html')
+
 def display_device(request, cls):
   items = cls.objects.all()
   context = {
