@@ -10,4 +10,6 @@ urlpatterns = [
   re_path(r'^display_all$', display_all, name='display_all'),
 
   re_path(r'^add_desktop$', add_desktop, name='add_desktop'),
+  re_path(r'^add_laptop$', add_laptop, name='add_laptop'),
+  re_path(r'^add_mobile$', add_mobile, name='add_mobile'),
 ]

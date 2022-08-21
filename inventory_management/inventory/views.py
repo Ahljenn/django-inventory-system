@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from itertools import chain
 from .models import *
 from .forms import * 
@@ -41,9 +41,12 @@ def display_all(request):
   }
   return render(request, 'index.html', context)
 
-def add_desktop(request):
+def add_device(request, cls):
+  '''Modularized view to take in a class (cls) as a parameter
+     Generalized function to prevent rewriting of the interface
+  '''
   if request.method == 'POST':
-    form = DesktopForm(request.POST)
+    form = cls(request.POST)
 
     if form.is_valid():
       form.save()
@@ -51,5 +54,14 @@ def add_desktop(request):
       
   else:
     # Otherwise, display form
-    form = DesktopForm()
+    form = cls()
     return render(request, 'add_new.html', {'form': form})
+
+def add_desktop(request):
+  return add_device(request, DesktopForm)
+
+def add_laptop(request):
+  return add_device(request, LaptopForm)
+
+def add_mobile(request):
+  return add_device(request, MobileForm)
