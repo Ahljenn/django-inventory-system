@@ -48,7 +48,10 @@ def add_device(request, cls):
   else:
     # Otherwise, display form
     form = cls()
-    return render(request, 'add_new.html', {'form': form})
+    return render(request, 'add_new.html', {
+      'form': form, 
+      'header': cls.name + ' Device'
+      })
 
 def add_desktop(request):
   return add_device(request, DesktopForm)
