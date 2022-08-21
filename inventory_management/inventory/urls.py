@@ -16,4 +16,9 @@ urlpatterns = [
   re_path(r'^add_desktop$', add_desktop, name='add_desktop'),
   re_path(r'^add_laptop$', add_laptop, name='add_laptop'),
   re_path(r'^add_mobile$', add_mobile, name='add_mobile'),
+
+  # Edit Devices
+  re_path(r'^edit_desktop/(?P<pk>\d+)$', edit_desktop, name='edit_desktop'),
+  re_path(r'^edit_laptop/(?P<pk>\d+)$', edit_laptop, name='edit_laptop'),
+  re_path(r'^edit_mobile/(?P<pk>\d+)$', edit_mobile, name='edit_mobile'),
 ]

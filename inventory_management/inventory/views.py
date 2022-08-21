@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from itertools import chain
 from .models import *
 from .forms import * 
@@ -12,6 +12,9 @@ def index(request):
 def about(request):
   return render(request, 'about.html')
 
+
+# Display Devices
+# ================================================ #
 def display_device(request, cls):
   items = cls.objects.all()
   context = {
@@ -36,7 +39,12 @@ def display_all(request):
     'header' : 'All Items',
   }
   return render(request, 'index.html', context)
+# ================================================ #
 
+
+
+# Add Devices
+# ================================================ #
 def add_device(request, cls):
   '''Modularized view to take in a class (cls) as a parameter
      Generalized function to prevent rewriting of the interface
@@ -64,3 +72,31 @@ def add_laptop(request):
 
 def add_mobile(request):
   return add_device(request, MobileForm)
+# ================================================ #
+
+
+
+
+# Edit Devices
+# ================================================ #
+def edit_device(request, pk, model, cls):
+  item = get_object_or_404(model, pk = pk)
+  if request.method == 'POST':
+    form = cls(request.POST, instance = item)
+    if form.is_valid():
+      form.save()
+      return redirect('index')
+  
+  else:
+    form = cls(instance = item)
+    return render(request, 'edit_device.html', {'form': form})
+
+def edit_desktop(request, pk):
+  return edit_device(request, pk, Desktop, DesktopForm)
+
+def edit_laptop(request, pk):
+  return edit_device(request, pk, Laptop, LaptopForm)
+
+def edit_mobile(request, pk):
+  return edit_device(request, pk, Mobile, MobileForm)
+# ================================================ #

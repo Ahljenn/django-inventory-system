@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<div class="button-group">
+<div class="shadow p-3 mb-3 bg-white rounded">
   <a href="{% url 'display_all' %}" class="btn btn-dark btn-md" role="button">All</a>
 
   <a href="{% url 'display_desktops' %}" class="btn btn-primary btn-md" role="button">Desktop</a>
@@ -14,6 +14,8 @@
   <a href="{% url 'display_mobiles' %}" class="btn btn-primary btn-md" role="button">Mobile</a>
   <a href="{% url 'add_mobile' %}"  class="btn btn-warning btn-sm" role="button"> +</a>
 </div>
+
+<!-- Todo: Add ability to click on table item and go to separate page that shows info on that device -->
 
 {% if items %}
   <table class="table table-hover">
@@ -44,6 +46,21 @@
             <td>{{ item.status }}</td>
           {% endif %}
           <td>{{ item.condition }}</td>
+
+          {% if header|lower == "desktop" %}
+            <td>
+              <a href="{% url 'edit_desktop' item.pk %}" class="btn btn-warning" role="button"> Edit</a>
+            </td>
+          {% elif header|lower == "laptop" %}
+            <td>
+              <a href="{% url 'edit_laptop' item.pk %}" class="btn btn-warning" role="button"> Edit</a>
+            </td>
+          {% elif header|lower == "mobile"  %}
+            <td>
+              <a href="{% url 'edit_mobile' item.pk %}"class="btn btn-warning" role="button"> Edit</a>
+            </td>
+          {% endif %}
+
         </tr>
       {% endfor %}
     </tbody>
@@ -52,7 +69,9 @@
 {% else %}
 
   <br>
-  <h1>Welcome, click on any of the above to start.</h1>
+  <h1>Welcome!</h1>
+  <p>Click on any of the above to start.</p>
+  <hr>
 
 {% endif %}
 
