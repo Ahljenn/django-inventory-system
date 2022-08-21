@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #My apps
+    # Other apps
+    'import_export',
+
+    # My apps
     'inventory',
 ]
 
