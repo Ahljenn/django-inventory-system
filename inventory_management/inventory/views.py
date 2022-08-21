@@ -9,29 +9,22 @@ from .forms import *
 def index(request):
   return render(request, 'index.html')
 
-def display_desktops(request):
-  items = Desktop.objects.all()
+def display_device(request, cls):
+  items = cls.objects.all()
   context = {
     'items' : items,
-    'header' : 'Desktops',
+    'header' : cls.name,
   }
   return render(request, 'index.html', context)
+
+def display_desktops(request):
+  return display_device(request, Desktop)
 
 def display_laptops(request):
-  items = Laptop.objects.all()
-  context = {
-    'items' : items,
-    'header' : 'Laptops',
-  }
-  return render(request, 'index.html', context)
+  return display_device(request, Laptop)
 
 def display_mobiles(request):
-  items = Mobile.objects.all()
-  context = {
-    'items' : items,
-    'header' : 'Mobiles',
-  }
-  return render(request, 'index.html', context)
+  return display_device(request, Mobile)
 
 def display_all(request):
   items = list(chain(Desktop.objects.all(), Laptop.objects.all(), Mobile.objects.all()))

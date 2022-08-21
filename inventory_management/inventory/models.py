@@ -34,12 +34,15 @@ class Device(models.Model):
 
 class Laptop(Device):
   '''Inherits from the Device model'''
+  name = "Laptop"
   pass
 
 class Desktop(Device):
   '''Inherits from the Device model'''
+  name = "Desktop"
   pass
 
 class Mobile(Device):
   '''Inherits from the Device model'''
+  name = "Mobile"
   pass
