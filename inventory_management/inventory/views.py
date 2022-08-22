@@ -124,3 +124,10 @@ def delete_laptop(request, pk):
 def delete_mobile(request, pk):
   return delete_device(request, pk, Mobile, "Mobile")
 # ================================================ #
+
+
+
+# Other Dynamic Routes
+# ================================================ #
+def view_device(request, pk):
+  return render(request, 'view_device.html', {'header':'temp'})

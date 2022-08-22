@@ -41,7 +41,9 @@
           {% if header != 'All Items'%}
             <td>{{ item.pk }}</td>
           {% endif %}
-          <td>{{ item.type }}</td>
+          <td>
+            <a class="text-decoration-none" href="{% url 'view_device' item.pk %}">{{ item.type }}</a>
+          </td>
           <td>${{ item.price }}</td>
           {% if item.status == 'Sold' %}
             <td class="text-danger">{{ item.status }}</td>

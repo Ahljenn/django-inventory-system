@@ -26,4 +26,9 @@ urlpatterns = [
   re_path(r'^delete_desktop/(?P<pk>\d+)$', delete_desktop, name='delete_desktop'),
   re_path(r'^delete_laptop/(?P<pk>\d+)$', delete_laptop, name='delete_laptop'),
   re_path(r'^delete_mobile/(?P<pk>\d+)$', delete_mobile, name='delete_mobile'),
+
+  # Dynamic Routes
+  re_path(r'^view_device/(?P<pk>\d+)$', view_device, name='view_device'),
+
+
 ]
