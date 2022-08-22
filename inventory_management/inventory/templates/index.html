@@ -42,7 +42,7 @@
             <td>{{ item.pk }}</td>
           {% endif %}
           <td>{{ item.type }}</td>
-          <td>{{ item.price }}</td>
+          <td>${{ item.price }}</td>
           {% if item.status == 'Sold' %}
             <td class="text-danger">{{ item.status }}</td>
           {% else %}
@@ -66,7 +66,6 @@
               <a href="{% url 'delete_mobile' item.pk %}" class="btn btn-danger" role="button"> X</a>
             </td>
           {% endif %}
-
         </tr>
       {% endfor %}
     </tbody>
