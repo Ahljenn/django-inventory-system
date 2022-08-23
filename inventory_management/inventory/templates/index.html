@@ -42,7 +42,15 @@
             <td>{{ item.pk }}</td>
           {% endif %}
           <td>
-            <a class="text-decoration-none" href="{% url 'view_device' item.pk %}">{{ item.type }}</a>
+            {% if header|lower == 'desktop' %}
+              <a class="text-decoration-none" href="{% url 'view_desktop' item.pk %}">{{ item.type }}</a>
+            {% elif header|lower == "laptop" %}
+              <a class="text-decoration-none" href="{% url 'view_laptop' item.pk %}">{{ item.type }}</a>
+            {% elif header|lower == "mobile"  %}
+              <a class="text-decoration-none" href="{% url 'view_mobile' item.pk %}">{{ item.type }}</a>
+            {% else %}
+              {{ item.type }}
+            {% endif %}
           </td>
           <td>${{ item.price }}</td>
           {% if item.status == 'Sold' %}

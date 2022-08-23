@@ -32,14 +32,14 @@ class Device(models.Model):
     '''Returns string representation of the Device model'''
     return f'{self.type} - ${self.price}'
 
-class Laptop(Device):
-  '''Inherits from the Device model'''
-  name = "Laptop"
-  pass
-
 class Desktop(Device):
   '''Inherits from the Device model'''
   name = "Desktop"
+  pass
+
+class Laptop(Device):
+  '''Inherits from the Device model'''
+  name = "Laptop"
   pass
 
 class Mobile(Device):

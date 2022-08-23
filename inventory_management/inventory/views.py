@@ -129,5 +129,20 @@ def delete_mobile(request, pk):
 
 # Other Dynamic Routes
 # ================================================ #
-def view_device(request, pk):
-  return render(request, 'view_device.html', {'header':'temp'})
+def view_device(request, pk, cls):
+  device = cls.objects.get(pk = pk)
+
+  return render(request, 'view_device.html', {
+    'device': device,
+    'header': device.type
+    })
+
+def view_desktop(request, pk):
+  return view_device(request, pk, Desktop)
+
+def view_laptop(request, pk):
+  return view_device(request, pk, Laptop)
+
+def view_mobile(request, pk):
+  return view_device(request, pk, Mobile)
+# ================================================ #
