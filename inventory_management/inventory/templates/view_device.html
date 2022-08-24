@@ -2,6 +2,12 @@
 
 {% block body %}
 
-  {{header}}
+  <h1>{{header}}</h1>
+  <h3>Price: ${{device.price}}</h3>
+  <p>Status: {{device.status}}</p>
+  <p>Issues: {{device.issues}}</p>
+  <p>Condition: {{device.condition}}</p>
+  <p>Description: {{device.description|default_if_none:"No description"}}</p>
+  <img class="rounded float-left img-thumbnail" alt="devices" src="https://live.staticflickr.com/6183/6153522068_0437d550f7_b.jpg"/>
 
 {% endblock %}
