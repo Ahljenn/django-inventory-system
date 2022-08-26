@@ -34,6 +34,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+            </li>
           </ul>
           <form class="d-flex">
             <input
@@ -41,6 +44,7 @@
               type="search"
               placeholder="Search"
               aria-label="Search"
+              disabled
             />
             <button class="btn btn-outline-light" type="submit">Search</button>
           </form>
