@@ -32,6 +32,7 @@
         {% if header != 'All Items'%}
           <th>Modify</th>
         {% endif %}
+        <th>Order</th>
       </tr>
     </thead>
 
@@ -49,7 +50,7 @@
             {% elif header|lower == "mobile"  %}
               <a class="text-decoration-none" href="{% url 'view_mobile' item.pk %}">{{ item.type }}</a>
             {% else %}
-              {{ item.type }}
+              {{ item.type }} - <b>{{ item.name}}</b>
             {% endif %}
           </td>
           <td>${{ item.price }}</td>
@@ -74,6 +75,20 @@
             <td>
               <a href="{% url 'edit_mobile' item.pk %}"class="btn btn-warning" role="button"> Edit</a>
               <a href="{% url 'delete_mobile' item.pk %}" class="btn btn-danger" role="button"> X</a>
+            </td>
+          {% endif %}
+
+          {% if item.status|lower == "available" %}
+            <td>
+              <a href="#" class="btn btn-primary" role="button"> Order </a>
+            </td>
+          {% elif item.status|lower == "restocking" %}
+            <td>
+              <a href="#" class="btn btn-warning" role="button"> Book </a>
+            </td>
+          {% else %}
+            <td> 
+              <a href="#" class="btn btn-warning" role="button"> Notify </a>
             </td>
           {% endif %}
         </tr>
