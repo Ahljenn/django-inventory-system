@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # Other apps
     'import_export',
+    'widget_tweaks',
 
     # My apps
     'inventory',

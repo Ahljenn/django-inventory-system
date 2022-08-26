@@ -5,7 +5,8 @@ class Order(models.Model):
 
   type = models.CharField(max_length=100, blank=False)
   price = models.PositiveIntegerField(default=1)
-
+  date_placed = models.DateTimeField(auto_now_add=True)
+  
   condition = models.CharField(
     max_length=20,
     default = 'New',
