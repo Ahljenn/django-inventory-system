@@ -2,6 +2,13 @@
 
 {% block body %}
 
+<script>
+  $(document).on("click", ".open-action-modal", function() {
+    let actionId = $(this).data('id');
+    $(".modal-body #actionId").text(`Are you sure you would like to ${actionId}?`);
+  });
+</script>
+
 <div class="shadow p-3 mb-3 bg-white rounded">
   <a href="{% url 'display_all' %}" class="btn btn-dark btn-md" role="button">All</a>
 
@@ -85,15 +92,15 @@
 
           {% if item.status|lower == "available" %}
             <td>
-              <a href="#" class="btn btn-primary" role="button"> Order </a>
+              <a type="button" class="open-action-modal btn btn-primary" data-bs-toggle="modal" data-bs-target="#actionModal" data-id="order"> Order </a>
             </td>
           {% elif item.status|lower == "restocking" %}
             <td>
-              <a href="#" class="btn btn-warning" role="button"> Book </a>
+              <a type="button" class="open-action-modal btn btn-warning" data-bs-toggle="modal" data-bs-target="#actionModal" data-id="book"> Book </a>
             </td>
           {% else %}
             <td> 
-              <a href="#" class="btn btn-warning" role="button"> Notify </a>
+              <a type="button" class="open-action-modal btn btn-warning" data-bs-toggle="modal" data-bs-target="#actionModal" data-id="notify"> Notify </a>
             </td>
           {% endif %}
         </tr>
@@ -101,10 +108,32 @@
     </tbody>
   </table>
 
+
+
+
+  <!-- Action Modal -->
+  <div class="modal fade" id="actionModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="actionModalLabel">Sending request</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p name="actionId" id="actionId"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nevermind</button>
+          <button type="button" class="btn btn-primary">Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% else %}
 
   <br>
-  <h1>Welcome!</h1>
+  <h2>Welcome!</h2>
   <p>Click on any of the above to start.</p>
   <hr>
 
