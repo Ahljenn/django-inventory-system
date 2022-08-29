@@ -32,5 +32,6 @@ urlpatterns = [
   re_path(r'^view_laptop/(?P<pk>\d+)$', view_laptop, name='view_laptop'),
   re_path(r'^view_mobile/(?P<pk>\d+)$', view_mobile, name='view_mobile'),
 
-
+  # Send action
+  re_path(r'^send_action/(?P<pk>\d+)$', send_action, name='send_action'),
 ]

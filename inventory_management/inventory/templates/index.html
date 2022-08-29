@@ -90,19 +90,23 @@
             </td>
           {% endif %}
 
-          {% if item.status|lower == "available" %}
-            <td>
-              <a type="button" class="open-action-modal btn btn-primary" data-bs-toggle="modal" data-bs-target="#actionModal" data-id="order"> Order </a>
-            </td>
-          {% elif item.status|lower == "restocking" %}
-            <td>
-              <a type="button" class="open-action-modal btn btn-warning" data-bs-toggle="modal" data-bs-target="#actionModal" data-id="book"> Book </a>
-            </td>
-          {% else %}
-            <td> 
-              <a type="button" class="open-action-modal btn btn-warning" data-bs-toggle="modal" data-bs-target="#actionModal" data-id="notify"> Notify </a>
-            </td>
-          {% endif %}
+          <form method='POST' href="{% url 'send_action' item.pk %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {% if item.status|lower == "available" %}
+              <td>
+                <a type="button" class="open-action-modal btn btn-primary" data-bs-toggle="modal" data-bs-target="#actionModal" data-id="order"> Order </a>
+              </td>
+            {% elif item.status|lower == "restocking" %}
+              <td>
+                <a type="button" class="open-action-modal btn btn-warning" data-bs-toggle="modal" data-bs-target="#actionModal" data-id="book"> Book </a>
+              </td>
+            {% else %}
+              <td> 
+                <a type="button" class="open-action-modal btn btn-warning" data-bs-toggle="modal" data-bs-target="#actionModal" data-id="notify"> Notify </a>
+              </td>
+            {% endif %}
+          </form>
         </tr>
       {% endfor %}
     </tbody>

@@ -146,3 +146,21 @@ def view_laptop(request, pk):
 def view_mobile(request, pk):
   return view_device(request, pk, Mobile)
 # ================================================ #
+
+
+
+# Send Action Request
+# ================================================ #
+def send_action(request, pk, cls):
+  if request.method == 'POST':
+    order = request.POST
+    if form.is_valid():
+      order = form.cleaned_data['order']
+      device = cls.objects.get(pk = pk)
+      device.order = order
+      device.save()
+  
+
+
+
+# ================================================ #
